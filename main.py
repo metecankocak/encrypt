@@ -39,8 +39,14 @@ key = Fernet.generate_key()
 cipher_suite = Fernet(key)
 
 def click_save():
-    secret_text = cipher_suite.encrypt(my_text.get("1.0", END).encode())
-    print(secret_text)
+    secret_text = str(cipher_suite.encrypt(my_text.get("1.0", END).encode()))
+    with open("şifeler.txt", "r+", encoding="utf-8") as file:
+        file.write(title_entry.get())
+        file.write("\n-----------\n")
+        file.write(secret_text)
+        file.write("\n-----------\n")
+
+
 
 
 def click_decrypt():
