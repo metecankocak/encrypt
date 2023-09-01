@@ -1,6 +1,8 @@
 import tkinter.messagebox
 from tkinter import *
 from PIL import ImageTk, Image
+from cryptography.fernet import Fernet
+
 
 window = Tk()
 
@@ -32,8 +34,14 @@ password_entry = Entry(width=30, )
 password_entry.pack()
 password_entry.get()
 
+
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
 def click_save():
-    pass
+    secret_text = cipher_suite.encrypt(my_text.get("1.0", END).encode())
+    print(secret_text)
+
 
 def click_decrypt():
     pass
