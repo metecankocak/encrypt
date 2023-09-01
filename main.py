@@ -40,11 +40,13 @@ cipher_suite = Fernet(key)
 
 def click_save():
     secret_text = str(cipher_suite.encrypt(my_text.get("1.0", END).encode()))
-    with open("şifeler.txt", "r+", encoding="utf-8") as file:
+    with (open("şifeler.txt", "r+", encoding="utf-8") as file):
+        file.read()
         file.write(title_entry.get())
-        file.write("\n-----------\n")
+        file.write("\n---şifreniz---\n")
         file.write(secret_text)
-        file.write("\n-----------\n")
+        file.write("\n------------------------\n")
+
 
 
 
