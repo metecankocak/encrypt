@@ -2,7 +2,6 @@ import tkinter.messagebox
 from tkinter import *
 from PIL import ImageTk, Image
 from base64 import *
-import json
 
 
 window = Tk()
