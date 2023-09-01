@@ -34,18 +34,31 @@ password_entry = Entry(width=30, )
 password_entry.pack()
 password_entry.get()
 
+my_box= tkinter.messagebox
+
 
 key = Fernet.generate_key()
 cipher_suite = Fernet(key)
 
 def click_save():
-    secret_text = str(cipher_suite.encrypt(my_text.get("1.0", END).encode()))
-    with (open("şifeler.txt", "r+", encoding="utf-8") as file):
-        file.read()
-        file.write(title_entry.get())
-        file.write("\n---şifreniz---\n")
-        file.write(secret_text)
-        file.write("\n------------------------\n")
+
+    if password_entry.get() != "mete":
+        my_box.showinfo("Bilgi", "Hatalı şifre girdiniz.")
+
+    elif not title_entry.get():
+        my_box.showinfo("Bilgi", "dosya adı boş bırakılamaz.")
+    elif not my_text.get("1.0", END):
+        my_box.showinfo("Bilgi", "metin kutusunu boş bırakamazsınız.")
+    elif not password_entry.get():
+        my_box.showinfo("Bilgi", "şifre alanını boş bırakamazsınız.")
+    else:
+        secret_text = str(cipher_suite.encrypt(my_text.get("1.0", END).encode()))
+        with (open("şifeler.txt", "r+", encoding="utf-8") as file):
+            file.read()
+            file.write(f"{title_entry.get()}, dosyasının şifresi:\n")
+
+            file.write(secret_text)
+            file.write("\n------------------------\n")
 
 
 
