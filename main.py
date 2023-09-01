@@ -1,7 +1,8 @@
 import tkinter.messagebox
 from tkinter import *
 from PIL import ImageTk, Image
-from cryptography.fernet import Fernet
+from base64 import *
+import json
 
 
 window = Tk()
@@ -37,8 +38,6 @@ password_entry.get()
 my_box= tkinter.messagebox
 
 
-key = Fernet.generate_key()
-cipher_suite = Fernet(key)
 
 def click_save():
 
@@ -52,26 +51,33 @@ def click_save():
     elif not password_entry.get():
         my_box.showinfo("Bilgi", "şifre alanını boş bırakamazsınız.")
     else:
-        secret_text = str(cipher_suite.encrypt(my_text.get("1.0", END).encode()))
+
+        secret_text= b64encode(my_text.get("1.0", END).encode('utf-8'))
         with (open("şifeler.txt", "r+", encoding="utf-8") as file):
+
             file.read()
             file.write(f"{title_entry.get()}, dosyasının şifresi:\n")
 
-            file.write(secret_text)
+            file.write(str(secret_text))
             file.write("\n------------------------\n")
 
 
 
-
-
 def click_decrypt():
-    pass
+    secret_text= (my_text.get("1.2", 'end -2c').encode())
+    orijinal_veri =  b64decode(secret_text)
+    orijinal_metin = orijinal_veri.decode("utf-8")
+
+    my_box.showinfo(title= "bilgi", message= f"şifreniz: {orijinal_metin}")
+
+
+
 
 
 save_button = Button(text="Kaydet ve şifrele", command=click_save)
 save_button.pack()
 
-decrypt_button=Button(text="şifreyi çöz")
+decrypt_button=Button(text="şifreyi çöz", command=click_decrypt)
 decrypt_button.pack()
 
 my_text.pack()
