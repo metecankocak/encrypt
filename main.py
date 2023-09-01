@@ -18,7 +18,21 @@ title_entry.pack()
 
 text_label= Label(text="Lütfen şifrelemek istediğiniz metni yazın.")
 text_label.pack()
-my_text= Text(height=10, width=40)
+my_text= Text(height=15, width=45)
+my_text.pack()
+
+password_label= Label(text= "Lütfen şifrenizi giriniz.")
+
+password_label.pack()
+password_entry = Entry(width=30, )
+password_entry.pack()
+
+save_button = Button(text="Kaydet ve şifrele")
+save_button.pack()
+
+decrypt_button=Button(text="şifreyi çöz")
+decrypt_button.pack()
+
 my_text.pack()
 
 
